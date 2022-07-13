@@ -13,8 +13,6 @@ Please download checkpoint files of STML and pre-trained model (SwAV, ImageNet) 
 - NumPy
 - tqdm
 - wandb
-- faiss
-
 
 ## Datasets
 
