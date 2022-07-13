@@ -68,8 +68,8 @@ parser.add_argument('--fix_lr', default = False, type = utils.bool_flag,
 parser.add_argument('--weight_decay', default = 1e-2, type = float,
     help = 'Weight decay setting'
 )
-parser.add_argument('--IPC', default = 5, type = int,
-    help = 'Balanced sampling, images per class'
+parser.add_argument('--num_neighbors', default = 5, type = int,
+    help = 'For balanced sampling, the number of neighbors per query'
 )
 parser.add_argument('--bn_freeze', default = 0, type = int,
     help = 'Batch normalization parameter freeze'
@@ -235,7 +235,7 @@ else:
 if args.gpu_id == -1:
     model_teacher = nn.DataParallel(model_teacher)
     model_student = nn.DataParallel(model_student)
-stml_criterion = loss.STML_loss(delta = args.delta, sigma = args.sigma, view=args.view, disable_mu = args.student_norm, topk=args.IPC * args.view).cuda()
+stml_criterion = loss.STML_loss(delta = args.delta, sigma = args.sigma, view=args.view, disable_mu = args.student_norm, topk=args.num_neighbors * args.view).cuda()
 
 # Momentum Update
 momentum_update = loss.Momentum_Update(momentum=args.momentum).cuda()
@@ -274,7 +274,7 @@ for epoch in range(0, args.nb_epochs):
     same_idxs = []
     
     if epoch % 1 == 0:
-        balanced_sampler = sampler.NNBatchSampler(trn_dataset, model_student, dl_sampling, args.sz_batch, args.IPC, True)
+        balanced_sampler = sampler.NNBatchSampler(trn_dataset, model_student, dl_sampling, args.sz_batch, args.num_neighbors, True)
         dl_tr = torch.utils.data.DataLoader(trn_dataset, num_workers = args.nb_workers, pin_memory = True, batch_sampler = balanced_sampler)
     
     model_student.train()

@@ -55,7 +55,7 @@ python3 code/main.py --gpu-id 0 \
                         --view 2 \
                         --sigma 3 \
                         --delta 1 \
-                        --IPC 5
+                        --num_neighbors 5
 ```
 
 - Train a target embedding network with BN-Inception (d=512) using STML
@@ -70,7 +70,7 @@ python3 code/main.py --gpu-id 0 \
                         --view 2 \
                         --sigma 3 \
                         --delta 1 \
-                        --IPC 5 \
+                        --num_neighbors 5 \
                         --bn-freeze 1
 ```
 
@@ -88,7 +88,7 @@ python3 code/main.py --gpu-id 0 \
                         --view 2 \
                         --sigma 3 \
                         --delta 1 \
-                        --IPC 5
+                        --num_neighbors 5
 ```
 
 - Train a target embedding network with BN-Inception (d=512) using STML 
@@ -103,7 +103,7 @@ python3 code/main.py --gpu-id 0 \
                         --view 2 \
                         --sigma 3 \
                         --delta 1 \
-                        --IPC 5 \
+                        --num_neighbors 5 \
                         --bn-freeze 1
 ```
 
@@ -121,7 +121,7 @@ python3 code/main.py --gpu-id 0 \
                         --view 2 \
                         --sigma 3 \
                         --delta 0.9 \
-                        --IPC 2 \
+                        --num_neighbors 2 \
                         --momentum 0.9
 ```
 
@@ -137,7 +137,7 @@ python3 code/main.py --gpu-id 0 \
                         --view 2 \
                         --sigma 3 \
                         --delta 0.9 \
-                        --IPC 2 \
+                        --num_neighbors 2 \
                         --momentum 0.9 \
                         --bn_freeze 1
 ```
@@ -157,7 +157,7 @@ python3 code/main.py --gpu-id 0 \
                         --view 2 \
                         --sigma 3 \
                         --delta 0.9 \
-                        --IPC 2 \
+                        --num_neighbors 2 \
                         --momentum 0.9 \
                         --pretrained false \
                         --weight-decay 1e-2 \
