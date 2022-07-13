@@ -19,7 +19,7 @@ This repository provides source code of unsupervised metric learning experiments
 ### Experimental Restuls
 - Our model with 128 embedding dimensions outperforms all previous arts using higher embedding dimensions and sometimes surpasses supervised learning methods. 
 
-<p align="center"><img src="misc/stml_recall.png" alt="graph" width="80%"></p>
+<p align="center"><img src="misc/stml_recall.png" alt="graph" width="70%"></p>
 
 ## Requirements
 
