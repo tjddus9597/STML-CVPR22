@@ -152,7 +152,7 @@ python3 code/main.py --gpu-id 0 \
                         --embedding_size 128 \
                         --optimizer adamp \
                         --lr 5e-4 \
-                        -- fix_lr true \
+                        --fix_lr true \
                         --dataset SOP \
                         --view 2 \
                         --sigma 3 \
