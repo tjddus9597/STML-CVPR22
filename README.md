@@ -1,11 +1,25 @@
-
 # Self-Taught Metric Learning without Labels
 
-Supplementary material provides source code of experiments on three datasets (CUB-200-2011, Cars-196 and Stanford Online Products) and pretrained models.
+Official PyTorch implementation of CVPR 2022 paper [**Self-Taught Metric Learning without Labels**](https://arxiv.org/abs/2205.01903). 
 
-Please download checkpoint files of STML and pre-trained model (SwAV, ImageNet) through this [Link](https://drive.google.com/file/d/1Kh2kToqhZG9GHlkHGKPlKo844evnwMN1/view?usp=sharing). <br>
-(There are separate folders for each dataset, and the checkpoint file is in a folder with its settings as a name.)
+A standard embedding network trained with **Self-Taught Metric Learning framework(STML)** achieves SOTA performance on unsupervised metric learning
+ and sometimes even beats supervised learning models.
 
+This repository provides source code of unsupervised metric learning experiments on three datasets (CUB-200-2011, Cars-196, Stanford Online Products).
+
+## Overview
+
+### Self-Taught Metric Learning
+- 1. The contextualized semantic similarity between a pair of data is estimated on the embedding space of the teacher network. 
+- 2. The semantic similarity is then used as a pseudo label, and the student network is optimized by relaxed contrastive loss with KL divergence.
+- 3. The teacher network is updated by an exponential moving average of the student. The student network learns by iterating these steps a number of times, and its backbone and embedding layer in light green are considered as our final model.
+  
+<p align="center"><img src="misc/stml_overview.png" alt="graph" width="80%"></p>
+
+### Experimental Restuls
+- Our model with 128 embedding dimensions outperforms all previous arts using higher embedding dimensions and sometimes surpasses supervised learning methods. 
+
+<p align="center"><img src="misc/stml_recall.png" alt="graph" width="90%"></p>
 ## Requirements
 
 - Python3
@@ -148,3 +162,24 @@ python3 code/main.py --gpu-id 0 \
                         --batch-size 120 \
                         --epoch 180
 ```
+
+## Acknowledgements
+
+Our source code is modified and adapted on these great repositories:
+
+- [Embedding Transfer with Label Relaxation for Improved Metric Learning](https://github.com/tjddus9597/LabelRelaxation-CVPR21)
+- [Proxy Anchor Loss for Deep Metric Learning](https://github.com/tjddus9597/Proxy-Anchor-CVPR2020)
+- [No Fuss Distance Metric Learning using Proxies](https://github.com/dichotomies/proxy-nca)
+- [PyTorch Metric learning](https://github.com/KevinMusgrave/pytorch-metric-learning)
+
+
+## Citation
+
+If you use this method or this code in your research, please cite as:
+
+    @inproceedings{kim2022self,
+      title={Self-Taught Metric Learning without Labels},
+      author={Kim, Sungyeon and Kim, Dongwon and Cho, Minsu and Kwak, Suha},
+      booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+      year={2022}
+    }
