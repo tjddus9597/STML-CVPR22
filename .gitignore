@@ -1,0 +1,17 @@
+# ignore folders
+wandb/
+logs/*
+data/*
+pretrained_teacher/
+
+# ignore files
+*.jpg
+*.jpeg
+*.npy
+*.txt
+
+
+# Exception
+!data/.gitkeep
+!logs/.gitkeep
+.DS_Store
