@@ -113,7 +113,7 @@ python3 code/main.py --gpu-id 0 \
 
 ```bash
 python3 code/main.py --gpu-id 0 \
-                        --model bn_inception \
+                        --model googlenet \
                         --embedding_size 512 \
                         --optimizer adamp \
                         --lr 1e-4 \
