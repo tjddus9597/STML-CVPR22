@@ -12,7 +12,8 @@ This repository provides source code of unsupervised metric learning experiments
 ### Self-Taught Metric Learning
 - Contextualized semantic similarity between a pair of data is estimated on the embedding space of the teacher network. 
 - The semantic similarity is then used as a pseudo label, and the student network is optimized by relaxed contrastive loss with KL divergence.
-- The teacher network is updated by an exponential moving average of the student. The student network learns by iterating these steps a number of times, and its backbone and embedding layer in light green are considered as our final model.
+- The teacher network is updated by an exponential moving average of the student. 
+- The student network learns by iterating these steps a number of times, and its backbone and embedding layer in light green are considered as our final model.
   
 <p align="center"><img src="misc/stml_overview.png" alt="graph" width="90%"></p>
 
@@ -20,6 +21,7 @@ This repository provides source code of unsupervised metric learning experiments
 - Our model with 128 embedding dimensions outperforms all previous arts using higher embedding dimensions and sometimes surpasses supervised learning methods. 
 
 <p align="center"><img src="misc/stml_recall.png" alt="graph" width="80%"></p>
+
 ## Requirements
 
 - Python3
