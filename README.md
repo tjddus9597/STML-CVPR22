@@ -10,10 +10,9 @@ This repository provides source code of unsupervised metric learning experiments
 ## Overview
 
 ### Self-Taught Metric Learning
-- Contextualized semantic similarity between a pair of data is estimated on the embedding space of the teacher network. 
-- The semantic similarity is then used as a pseudo label, and the student network is optimized by relaxed contrastive loss with KL divergence.
-- The teacher network is updated by an exponential moving average of the student. 
-- The student network learns by iterating these steps a number of times, and its backbone and embedding layer in light green are considered as our final model.
+1. Contextualized semantic similarity between a pair of data is estimated on the embedding space of the teacher network. 
+2. The semantic similarity is then used as a pseudo label, and the student network is optimized by relaxed contrastive loss with KL divergence.
+3. The teacher network is updated by an exponential moving average of the student.
   
 <p align="center"><img src="misc/stml_overview.png" alt="graph" width="90%"></p>
 
