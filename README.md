@@ -3,7 +3,7 @@
 </div>
 
 <div align="center">
-  <h3><a href=https://cvlab.postech.ac.kr/~sungyeon>Sungyeon Kim</a>, Dongwon Kim</a>, <a href=https://cvlab.postech.ac.kr/~mcho>Minsu Cho</a>, <a href=https://suhakwak.github.io/>Suha Kwak</a></h3>
+  <h3><a href=https://cvlab.postech.ac.kr/~sungyeon>Sungyeon Kim</a>, <a href=https://github.com/kdwonn>Dongwon Kim</a>, <a href=https://cvlab.postech.ac.kr/~mcho>Minsu Cho</a>, <a href=https://suhakwak.github.io/>Suha Kwak</a></h3>
 </div>
 
 <div align="center">
