@@ -11,7 +11,7 @@
 </div>
 
 <h1> </h1>
-Official PyTorch implementation of CVPR 2022 paper **Self-Taught Metric Learning without Labels (STML)**. 
+Official PyTorch implementation of CVPR 2022 paper <br>Self-Taught Metric Learning without Labels (STML)</br>. 
 A standard embedding network trained with STML achieves SOTA performance on unsupervised metric learning
  and sometimes even beats supervised learning models.
 This repository provides source code of unsupervised metric learning experiments on three datasets (CUB-200-2011, Cars-196, Stanford Online Products).
