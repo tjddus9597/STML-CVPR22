@@ -1,6 +1,14 @@
 # Self-Taught Metric Learning without Labels
 
-Official PyTorch implementation of CVPR 2022 paper [**Self-Taught Metric Learning without Labels**](https://arxiv.org/abs/2205.01903). 
+<div align="center">
+  <h3><a href=https://cvlab.postech.ac.kr/~sungyeon></a>, Dongwon Kim</a>, <a href=https://cvlab.postech.ac.kr/~mcho>Minsu Cho</a>, <a href=https://suhakwak.github.io/>Suha Kwak</a></h3>
+</div>
+
+<div align="center">
+  <h4> <a href=http://arxiv.org/abs/2205.01903>[paper]</a>, <a href=http://cvlab.postech.ac.kr/research/STML>[project hompage]</a></h4>
+</div>
+
+Official PyTorch implementation of CVPR 2022 paper **Self-Taught Metric Learning without Labels**. 
 
 A standard embedding network trained with **Self-Taught Metric Learning framework(STML)** achieves SOTA performance on unsupervised metric learning
  and sometimes even beats supervised learning models.
