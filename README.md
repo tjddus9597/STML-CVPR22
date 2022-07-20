@@ -1,4 +1,6 @@
-# Self-Taught Metric Learning without Labels
+<div align="center">
+  <h1>Self-Taught Metric Learning without Labels <br> (CVPR 2022)</h1>
+</div>
 
 <div align="center">
   <h3><a href=https://cvlab.postech.ac.kr/~sungyeon>Sungyeon Kim</a>, Dongwon Kim</a>, <a href=https://cvlab.postech.ac.kr/~mcho>Minsu Cho</a>, <a href=https://suhakwak.github.io/>Suha Kwak</a></h3>
