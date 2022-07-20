@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Self-Taught Metric Learning without Labels <br> (CVPR 2022)</h1>
+  <h2>Self-Taught Metric Learning without Labels <br> (CVPR 2022)</h2>
 </div>
 
 <div align="center">
