@@ -37,7 +37,7 @@ This repository provides source code of unsupervised metric learning experiments
 - NumPy
 - tqdm
 - wandb
-- <a href=https://github.com/clovaai/AdamP>[adamp]</a>
+- [adamp](https://github.com/clovaai/AdamP)
 
 ## Datasets
 
