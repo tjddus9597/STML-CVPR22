@@ -62,6 +62,9 @@ parser.add_argument('--optimizer', default = 'adamp',
 parser.add_argument('--lr', default = 1e-4, type = float,
     help = 'Learning rate setting'
 )
+parser.add_argument('--emb-lr', default = 1e-4, type =float,
+    help = 'Learning rate for embedding layer'
+)
 parser.add_argument('--fix_lr', default = False, type = utils.bool_flag,
     help = 'Learning rate Fixing'
 )
@@ -225,10 +228,6 @@ if os.path.isfile(args.resume):
     print('=> student Loading Checkpoint {}'.format(args.resume))
     checkpoint = torch.load(args.resume, map_location='cpu'.format(0))
     model_student.load_state_dict(checkpoint['model_state_dict'])
-    
-    model_student.model.embedding = nn.Linear(model_student.model.num_ftrs, args.embedding_size).cuda()
-    torch.nn.init.orthogonal_(model_student.model.embedding.weight)
-    torch.nn.init.constant_(model_student.model.embedding.bias, 0)
 else:
     print('=> student No Checkpoint {}!!!!!!!!!!!!!'.format(args.resume))
     
@@ -241,8 +240,15 @@ stml_criterion = loss.STML_loss(delta = args.delta, sigma = args.sigma, view=arg
 momentum_update = loss.Momentum_Update(momentum=args.momentum).cuda()
 
 # Train Parameters
+fc_layer_lr = args.emb_lr if args.emb_lr else args.lr
+if args.gpu_id != -1:
+    embedding_param = list(model_student.model.embedding_f.parameters()) + list(model_student.model.embedding_g.parameters())
+else:
+    embedding_param = list(model_student.module.model.embedding_f.parameters()) + list(model_student.module.model.embedding_g.parameters())
 param_groups = [
-    {'params': model_student.parameters() if args.gpu_id != -1 else model_student.module.parameters()}
+    {'params': list(set(model_student.parameters()).difference(set(embedding_param))) if args.gpu_id != -1 else
+                 list(set(model_student.module.parameters()).difference(set(embedding_param)))},
+    {'params': embedding_param, 'lr':fc_layer_lr, 'weight_decay': float(args.weight_decay)},
 ]
 
 # Optimizer Setting

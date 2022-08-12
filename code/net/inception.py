@@ -155,9 +155,7 @@ class inception_v1(nn.Module):
             self.model.embedding_f = nn.Linear(self.num_ftrs, self.embedding_size)
             nn.init.orthogonal_(self.model.embedding_f.weight)
             nn.init.constant_(self.model.embedding_f.bias, 0)
-                
-
-
+            
     def forward(self, x):
         x = self.model.features(x)
         
@@ -177,92 +175,3 @@ class inception_v1(nn.Module):
             return x_g, x_f
         else:
             return x_g
-    
-    
-class inception_v1_SSL(nn.Module):
-    def __init__(self, embedding_size, pretrained = True, is_norm=True, pretrained_root=None):
-        super(inception_v1_SSL, self).__init__()
-        self.model = Inception()
-        if pretrained:
-            dic = {"3x3":"b", "5x5":"c", "1x1":"a", "poo":"d"} 
-            model_dict = self.model.state_dict()
-            if pretrained_root == None:
-                pretrained_dict = torch.load('./code/net/inception.pth')
-            else:
-                pretrained_dict = torch.load(pretrained_root)
-            for key in list(pretrained_dict.keys()):
-                l = key.split(".")
-                if "inception" in l[0]:
-                    l.insert(1, dic[l[1][:3]])
-                    newkey = ".".join(l)
-                else:
-                    newkey = key
-                newkey = "features." + newkey
-                tmp = pretrained_dict[key]
-                pretrained_dict[newkey] = tmp
-                del pretrained_dict[key]
-            pretrained_dict = {k: torch.from_numpy(v).cuda() for k, v in pretrained_dict.items() if k in model_dict}
-            model_dict.update(pretrained_dict)
-            self.model.load_state_dict(model_dict)
-
-        self.is_norm = is_norm
-        self.num_ftrs = 1024
-        self.embedding_size = embedding_size
-        self.model.gap = nn.AdaptiveAvgPool2d(1)
-        self.model.gmp = nn.AdaptiveMaxPool2d(1)
-                
-    def forward(self, x):
-        x = self.model.features(x)
-        
-        avg_x = self.model.gap(x)
-        max_x = self.model.gmp(x)
-        x = avg_x + max_x
-        feat = x.view(x.size(0), -1)
-        
-        x = self.model.embedding(feat)
-        if self.is_norm:
-            x = l2_norm(x)
-        
-        return feat, x
-    
-class inception_v1_moco(nn.Module):
-    def __init__(self, embedding_size, pretrained = True, is_norm=True):
-        super(inception_v1_moco, self).__init__()
-        self.model = Inception(embedding_size, pretrained, is_norm)
-        if pretrained:
-            dic = {"3x3":"b", "5x5":"c", "1x1":"a", "poo":"d"} 
-            model_dict = self.model.state_dict()
-            pretrained_dict = torch.load('./code/net/inception.pth')
-            for key in list(pretrained_dict.keys()):
-                l = key.split(".")
-                if "inception" in l[0]:
-                    l.insert(1, dic[l[1][:3]])
-                    newkey = ".".join(l)
-                else:
-                    newkey = key
-                newkey = "features." + newkey
-                tmp = pretrained_dict[key]
-                pretrained_dict[newkey] = tmp
-                del pretrained_dict[key]
-            pretrained_dict = {k: torch.from_numpy(v).cuda() for k, v in pretrained_dict.items() if k in model_dict}
-            model_dict.update(pretrained_dict)
-            self.model.load_state_dict(model_dict)
-
-        self.model.gap = nn.AdaptiveAvgPool2d(1)
-        self.model.gmp = nn.AdaptiveMaxPool2d(1)
-        
-        self.model.embedding = nn.Sequential(nn.Linear(1024, 1024), nn.ReLU(), nn.Linear(1024, 512))
-                
-    def forward(self, x):
-        x = self.model.features(x)
-        
-        avg_x = self.model.gap(x)
-        max_x = self.model.gmp(x)
-        x = avg_x + max_x
-        feat = x.view(x.size(0), -1)
-        
-        x = self.model.embedding(feat)
-        if self.is_norm:
-            x = self.l2_norm(x)
-        
-        return feat, x

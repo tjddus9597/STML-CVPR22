@@ -37,6 +37,7 @@ This repository provides source code of unsupervised metric learning experiments
 - NumPy
 - tqdm
 - wandb
+- <a href=https://github.com/clovaai/AdamP>[adamp]</a>
 
 ## Datasets
 
@@ -130,7 +131,9 @@ python3 code/main.py --gpu-id 0 \
                         --sigma 3 \
                         --delta 0.9 \
                         --num_neighbors 2 \
-                        --momentum 0.9
+                        --momentum 0.9 \
+                        --weight-decay 1e-2 \
+                        --emb-lr 1e-2
 ```
 
 - Train a target embedding network with BN-Inception (d=512) using STML 
@@ -147,6 +150,8 @@ python3 code/main.py --gpu-id 0 \
                         --delta 0.9 \
                         --num_neighbors 2 \
                         --momentum 0.9 \
+                        --weight-decay 1e-2 \
+                        --emb-lr 1e-2 \
                         --bn_freeze 1
 ```
 
@@ -160,7 +165,6 @@ python3 code/main.py --gpu-id 0 \
                         --embedding_size 128 \
                         --optimizer adamp \
                         --lr 5e-4 \
-                        --fix_lr true \
                         --dataset SOP \
                         --view 2 \
                         --sigma 3 \
@@ -170,7 +174,8 @@ python3 code/main.py --gpu-id 0 \
                         --pretrained false \
                         --weight-decay 1e-2 \
                         --batch-size 120 \
-                        --epoch 180
+                        --epoch 180 \
+                        --fix_lr true
 ```
 
 ## Acknowledgements
