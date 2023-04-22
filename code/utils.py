@@ -60,7 +60,6 @@ def predict_batchwise(model, dataloader):
                 # i = 2: sz_batch * indices
                 if i == 0:
                     # move images to device of model (approximate device)
-#                     J = model(J.cuda(), q_eval=True)
                     _, J = model(J.cuda(non_blocking=True))
 
                 for j in J:
@@ -75,7 +74,7 @@ def evaluate_euclid(model, dataloader, k_list, num_buffer=5000):
     
     # calculate embeddings with model and get targets
     X, T, _ = predict_batchwise(model, dataloader)
-    
+
     # get predictions by assigning nearest K neighbors with Euclidean distance
     K = max(k_list)
     Y = []
@@ -90,7 +89,7 @@ def evaluate_euclid(model, dataloader, k_list, num_buffer=5000):
             dist_emb = xs.pow(2).sum(1) + (-2) * X.mm(xs.t())
             dist_emb = X.pow(2).sum(1) + dist_emb.t()
 
-            y = T[dist_emb.topk(1 + K, largest = False)[1][:,1:]]
+            y = T[dist_emb.topk(1 + K, largest = False)[1][:,1:].to(T.device)]
             Y.append(y.float().cpu())
             xs = []
             
@@ -99,7 +98,7 @@ def evaluate_euclid(model, dataloader, k_list, num_buffer=5000):
     dist_emb = xs.pow(2).sum(1) + (-2) * X.mm(xs.t())
     dist_emb = X.pow(2).sum(1) + dist_emb.t()
     
-    y = T[dist_emb.topk(1 + K, largest = False)[1][:,1:]]
+    y = T[dist_emb.topk(1 + K, largest = False)[1][:,1:].to(T.device)]
     Y.append(y.float().cpu())
     Y = torch.cat(Y, dim=0)
 

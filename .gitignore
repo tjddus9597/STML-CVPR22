@@ -9,6 +9,7 @@ pretrained_teacher/
 *.jpeg
 *.npy
 *.txt
+*.pyc
 
 # Exception
 !data/.gitkeep

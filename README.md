@@ -16,6 +16,10 @@ Official PyTorch implementation of CVPR 2022 paper **Self-Taught Metric Learning
 A standard embedding network trained with STML achieves SOTA performance on unsupervised metric learning and sometimes even beats supervised learning models.
 This repository provides source code of unsupervised metric learning experiments on three datasets (CUB-200-2011, Cars-196, Stanford Online Products).
 
+## New Update
+- [23.04.22] Code for training and testing an embedding network with SSL Methods (MoCo, BYOL, MeanShift).
+- [23.04.22] Fix bug about "same device as the indexed tensor" in Evaluation.
+
 ## Overview
 
 ### Self-Taught Metric Learning
@@ -48,11 +52,11 @@ This repository provides source code of unsupervised metric learning experiments
 
 2. Extract the tgz or zip file into `./data/` (Exceptionally, for Cars-196, put the files in a `./data/cars196`)
 
-## Training Target Embedding Network
+## Training Embedding Network
 
 ### CUB-200-2011 (Unsupervised)
 
-- Train a target embedding network with GoogLeNet (d=512) using STML
+- Train an embedding network with GoogLeNet (d=512) using STML
 
 ```bash
 python3 code/main.py --gpu-id 0 \
@@ -67,7 +71,7 @@ python3 code/main.py --gpu-id 0 \
                         --num_neighbors 5
 ```
 
-- Train a target embedding network with BN-Inception (d=512) using STML
+- Train an embedding network with BN-Inception (d=512) using STML
 
 ```bash
 python3 code/main.py --gpu-id 0 \
@@ -85,7 +89,7 @@ python3 code/main.py --gpu-id 0 \
 
 ### Cars-196 (Unsupervised)
 
-- Train a target embedding network with GoogLeNet (d= 512) using STML
+- Train an embedding network with GoogLeNet (d= 512) using STML
 
 ```bash
 python3 code/main.py --gpu-id 0 \
@@ -100,7 +104,7 @@ python3 code/main.py --gpu-id 0 \
                         --num_neighbors 5
 ```
 
-- Train a target embedding network with BN-Inception (d=512) using STML 
+- Train an embedding network with BN-Inception (d=512) using STML 
 
 ```bash
 python3 code/main.py --gpu-id 0 \
@@ -118,7 +122,7 @@ python3 code/main.py --gpu-id 0 \
 
 ### Stanford Online Products (Unsupervised)
 
-- Train a target embedding network with GoogLeNet (d= 512) using STML
+- Train an embedding network with GoogLeNet (d= 512) using STML
 
 ```bash
 python3 code/main.py --gpu-id 0 \
@@ -136,7 +140,7 @@ python3 code/main.py --gpu-id 0 \
                         --emb-lr 1e-2
 ```
 
-- Train a target embedding network with BN-Inception (d=512) using STML 
+- Train an embedding network with BN-Inception (d=512) using STML 
 
 ```bash
 python3 code/main.py --gpu-id 0 \
@@ -157,7 +161,7 @@ python3 code/main.py --gpu-id 0 \
 
 ### Stanford Online Products (Unsupervised & From Scratch)
 
-- Train a target embedding network with ResNet18 (d=128) using STML 
+- Train an embedding network with ResNet18 (d=128) using STML 
 
 ```bash
 python3 code/main.py --gpu-id 0 \
@@ -176,6 +180,42 @@ python3 code/main.py --gpu-id 0 \
                         --batch-size 120 \
                         --epoch 180 \
                         --fix_lr true
+```
+
+## Training Target Embedding Network using SSL Method (MoCo, BYOL, MeanShift)
+
+### Example using MoCo
+
+- Train an embedding network with GoogLeNet (d=512) using MoCo
+
+```bash
+python3 code/main_SSL.py --gpu-id 0 \
+                        --model googlenet \
+                        --embedding_size 512 \
+                        --optimizer adamp \
+                        --lr 1e-4 \
+                        --dataset cub \
+                        --view 2 \
+                        --method moco \
+                        --memory-size 9600
+```
+
+### Example using MeanShift
+
+- Train an embedding network with GoogLeNet (d=512) using MeanShift
+- Note that BYOL is same with MeanShift using topk 1
+
+```bash
+python3 code/main_SSL.py --gpu-id 0 \
+                        --model googlenet \
+                        --embedding_size 512 \
+                        --optimizer adamp \
+                        --lr 1e-4 \
+                        --dataset cub \
+                        --view 2 \
+                        --method meanshift \
+                        --memory-size 9600 \
+                        --topk 5 
 ```
 
 ## Acknowledgements
