@@ -182,7 +182,7 @@ python3 code/main.py --gpu-id 0 \
                         --fix_lr true
 ```
 
-## Training Target Embedding Network using SSL Method (MoCo, BYOL, MeanShift)
+## Training Embedding Network using SSL Method
 
 ### Example using MoCo
 
