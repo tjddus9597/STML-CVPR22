@@ -226,6 +226,8 @@ Our source code is modified and adapted on these great repositories:
 - [Proxy Anchor Loss for Deep Metric Learning](https://github.com/tjddus9597/Proxy-Anchor-CVPR2020)
 - [No Fuss Distance Metric Learning using Proxies](https://github.com/dichotomies/proxy-nca)
 - [PyTorch Metric learning](https://github.com/KevinMusgrave/pytorch-metric-learning)
+- [MoCo: Momentum Contrast for Unsupervised Visual Representation Learning](https://github.com/facebookresearch/moco)
+- [Mean Shift for Self-Supervised Learning](https://github.com/UMBCvision/MSF)
 
 
 ## Citation
